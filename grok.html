@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IAPE - Instituto Adventista Pernambucano de Ensino</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            line-height: 1.6;
+            color: #FFFFFF; /* Branco */
+            background-color: #4B0082; /* Roxo escuro */
+        }
+
+        /* Animação de fade-in para textos */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeIn 1s ease-out forwards;
+        }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, #4B0082, #6A1B9A); /* Gradiente roxo */
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .logo-placeholder {
+            color: #FFFFFF; /* Branco */
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+
+        .menu-toggle {
+            display: none;
+            font-size: 1.8rem;
+            color: #FFFFFF; /* Branco */
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        .menu-toggle:hover {
+            color: #FFFF00; /* Amarelo */
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+        }
+
+        nav ul li {
+            margin: 0 1.5rem;
+        }
+
+        nav ul li a {
+            color: #FFFFFF; /* Branco */
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s, transform 0.2s;
+        }
+
+        nav ul li a:hover {
+            color: #FFFF00; /* Amarelo */
+            transform: scale(1.1);
+        }
+
+        /* Menu Sanduíche para Mobile */
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+            }
+
+            nav {
+                display: none;
+            }
+
+            nav.active {
+                display: block;
+                position: absolute;
+                top: 60px;
+                left: 0;
+                width: 100%;
+                background: linear-gradient(135deg, #4B0082, #6A1B9A); /* Gradiente roxo */
+            }
+
+            nav ul {
+                flex-direction: column;
+                padding: 1rem;
+            }
+
+            nav ul li {
+                margin: 0.5rem 0;
+            }
+        }
+
+        /* Seções */
+        section {
+            padding: 3rem 2rem; /* Reduzido para menos espaço */
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        section:nth-child(odd) {
+            background: linear-gradient(135deg, #6A1B9A, #8E44AD); /* Gradiente roxo */
+        }
+
+        section:nth-child(even) {
+            background-color: #F3E5F5; /* Roxo muito claro */
+            color: #4B0082; /* Roxo escuro para texto */
+        }
+
+        section h1 {
+            font-size: 2.8rem;
+            margin-bottom: 1rem;
+            color: #FFFF00; /* Amarelo */
+            font-weight: 700;
+            text-shadow: 0 2px 3px rgba(0, 0, 0, 0.2);
+        }
+
+        section p {
+            max-width: 600px;
+            font-size: 1.2rem;
+            color: inherit;
+        }
+
+        .glossary-term {
+            color: #FFFF00; /* Amarelo */
+            font-weight: 600;
+        }
+
+        /* Corpo - 3 Colunas */
+        #corpo .columns {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-top: 1.5rem;
+        }
+
+        #corpo .column {
+            flex: 1;
+            min-width: 250px;
+            max-width: 300px;
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 1rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        #corpo .column img {
+            width: 100%;
+            height: 200px;
+            background-color: #8E44AD; /* Roxo claro */
+            margin-bottom: 1rem;
+            border-radius: 8px;
+            transition: transform 0.3s;
+        }
+
+        #corpo .column img:hover {
+            transform: scale(1.05);
+        }
+
+        /* Foto - Mosaico */
+        #foto .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            padding: 1rem;
+            max-width: 1200px;
+        }
+
+        #foto .gallery img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s;
+        }
+
+        #foto .gallery img:hover {
+            transform: scale(1.05);
+        }
+
+        /* Contato */
+        #contato form {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            max-width: 500px;
+            width: 100%;
+        }
+
+        #contato input, #contato textarea {
+            padding: 0.8rem;
+            border: 1px solid #FFFFFF; /* Borda branca */
+            border-radius: 8px;
+            font-size: 1rem;
+            background-color: #8E44AD; /* Roxo claro */
+            color: #FFFFFF; /* Texto branco */
+            transition: box-shadow 0.3s;
+        }
+
+        #contato input:focus, #contato textarea:focus {
+            box-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
+            outline: none;
+        }
+
+        #contato button {
+            background-color: #6A1B9A; /* Roxo */
+            color: #FFFFFF; /* Branco */
+            padding: 0.8rem;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            font-weight: 600;
+            transition: background-color 0.3s, color 0.3s, transform 0.2s;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        #contato button:hover {
+            background-color: #FFFF00; /* Amarelo */
+            color: #4B0082; /* Roxo escuro */
+            transform: scale(1.05);
+        }
+
+        /* Footer */
+        footer {
+            background: linear-gradient(135deg, #4B0082, #6A1B9A); /* Gradiente roxo */
+            color: #FFFFFF; /* Branco */
+            text-align: center;
+            padding: 1.5rem;
+            box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        footer p {
+            margin: 0.3rem 0;
+            font-size: 1rem;
+        }
+
+        @media (max-width: 768px) {
+            section h1 {
+                font-size: 2.2rem;
+            }
+
+            section p {
+                font-size: 1rem;
+                padding: 0 1rem;
+            }
+
+            #corpo .columns {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="logo-placeholder">Logo IAPE</div>
+        <div class="menu-toggle">☰</div>
+        <nav>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#corpo">Sobre</a></li>
+                <li><a href="#foto">Galeria</a></li>
+                <li><a href="#contato">Contato</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Home -->
+    <section id="home">
+        <h1 class="fade-in">Bem-vindo ao IAPE</h1>
+        <p class="fade-in">Instituto Adventista Pernambucano de Ensino - Educação de qualidade para o futuro.</p>
+    </section>
+
+    <!-- Corpo -->
+    <section id="corpo">
+        <h1 class="fade-in">Sobre Nós</h1>
+        <p class="fade-in">Conheça mais sobre nossa <span class="glossary-term">missão</span>, <span class="glossary-term">visão</span> e <span class="glossary-term">valores</span>.</p>
+        <div class="columns">
+            <div class="column">
+                <img src="istock_1.jpg" alt="Imagem 1">
+                <p class="fade-in">Nossa <span class="glossary-term">missão</span> é promover uma educação integral, formando cidadãos éticos e preparados.</p>
+            </div>
+            <div class="column">
+                <img src="istock_2.jpg" alt="Imagem 2">
+                <p class="fade-in">Buscamos excelência acadêmica com <span class="glossary-term">valores cristãos</span>.</p>
+            </div>
+            <div class="column">
+                <img src="istock_3.webp" alt="Imagem 3">
+                <p class="fade-in">Oferecemos um ambiente acolhedor e inovador para o <span class="glossary-term">aprendizado</span>.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Foto -->
+    <section id="foto">
+        <h1 class="fade-in">Galeria de Fotos</h1>
+        <p class="fade-in">Confira momentos especiais do IAPE.</p>
+        <div class="gallery">
+            <img src="img_1.jpg" alt="Foto 1">
+            <img src="img_2.webp" alt="Foto 2">
+            <img src="img_3.jpg" alt="Foto 3">
+            <img src="img_4.webp" alt="Foto 4">
+            <img src="img_5.jpg" alt="Foto 5">
+            <img src="img_6.webp" alt="Foto 6">
+        </div>
+    </section>
+
+    <!-- Contato -->
+    <section id="contato">
+        <h1 class="fade-in">Entre em Contato</h1>
+        <p class="fade-in">Envie sua mensagem diretamente pelo WhatsApp.</p>
+        <form id="contact-form">
+            <input type="text" id="name" placeholder="Seu Nome" required>
+            <textarea id="message" placeholder="Sua Mensagem" rows="5" required></textarea>
+            <button type="submit">Enviar Mensagem</button>
+        </form>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p class="fade-in">Gabriel Sales</p>
+        <p class="fade-in">IAPE - Instituto Adventista Pernambucano de Ensino</p>
+        <p class="fade-in">Telefone: 81 99999-9999</p>
+        <p class="fade-in">BR 232 km 91, CEP 55.695-000</p>
+    </footer>
+
+    <script>
+        // Menu Sanduíche
+        const menuToggle = document.querySelector('.menu-toggle');
+        const nav = document.querySelector('nav');
+        menuToggle.addEventListener('click', () => {
+            nav.classList.toggle('active');
+        });
+
+        // Formulário de Contato - WhatsApp
+        const form = document.getElementById('contact-form');
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const name = document.getElementById('name').value;
+            const message = document.getElementById('message').value;
+            const whatsappNumber = "81999999999"; // Substitua pelo número real
+            const whatsappMessage = encodeURIComponent(`Olá, sou ${name}. ${message}`);
+            window.open(`https://wa.me/${whatsappNumber}?text=${whatsappMessage}`, '_blank');
+            form.reset();
+        });
+
+        // Animação de Fade-in ao rolar
+        const fadeElements = document.querySelectorAll('.fade-in');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animationDelay = '0.2s';
+                }
+            });
+        }, { threshold: 0.1 });
+
+        fadeElements.forEach(el => observer.observe(el));
+    </script>
+</body>
+</html>
